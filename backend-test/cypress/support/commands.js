@@ -45,4 +45,25 @@ Cypress.Commands.add('authenticateSession', () => {
         Cypress.env({loginToken:response.body})
    })) 
 
-})
+   })
+
+   Cypress.Commands.add('authenticateSessionOwnCredentials', (username, password) => {
+    const  userCredentials = {
+        "username": username,
+        "password":password
+    }
+   cy.request({
+        method: "POST",
+        url: LOGIN_URL,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userCredentials)
+
+   }).then((response =>{
+        cy.log(response.body)
+        cy.log(response.status)
+        Cypress.env({loginToken:response.body})
+   })) 
+
+   })

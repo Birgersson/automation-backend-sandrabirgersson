@@ -59,7 +59,6 @@ function getAllBillsRequest(cy){
         }))
     }))
 }
-
 //
 function deleteRequestAfterGet(cy){
     // GET request to fetch all bills, helpfunction only. no auth. 
@@ -140,7 +139,6 @@ function createBillRequestAndEdit(cy){
        
     }))
 }
-
 //EDIT bill... no own auth, so only helpfunction
 function EditBillAfterGet(cy){
     // GET request to fetch all bills
