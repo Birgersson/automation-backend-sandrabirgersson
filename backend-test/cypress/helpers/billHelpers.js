@@ -1,49 +1,48 @@
 const ENDPOINT_GET_BILLS = 'http://localhost:3000/api/bills'
-const ENDPOINT_NEW_CLIENT =  'http://localhost:3000/api/client/new'
-const ENDPOINT_GET_CLIENT =  'http://localhost:3000/api/client/'
+const ENDPOINT_NEW_BILL =  'http://localhost:3000/api/bill/new'
+const ENDPOINT_GET_BILL =  'http://localhost:3000/api/bill/'
 
-
-function createClientRequest(cy){
+//create a new bill and gett all bills, asserting the new one is there.
+function createBillsRequest(cy){
         cy.authenticateSession().then((response =>{
             const payload = {
-                "name":"test1",
-                "email":"sandra@test.se",
-                "telephone":"0100000000"
+                "value":"123456",
+                "paid":false
             }
             cy.request({
                 method: "POST",
-                url: ENDPOINT_NEW_CLIENT,
+                url: ENDPOINT_NEW_BILL,
                 headers: {
                     'X-User-Auth': JSON.stringify(Cypress.env().loginToken),
                     'Content-Type': 'application/json'
                 },
                 body: payload
             }).then((response =>{
-                //cy.log(JSON.stringify(response))
                 const responseAsString = JSON.stringify(response)
-                expect(responseAsString).to.have.string(payload.name)
+                expect(responseAsString).to.have.string(payload.value)
             }))
-            getRequestAllClientsWithAssertion(cy, payload.name, payload.email, payload.telephone)
+            getRequestAllBillsWithAssertion(cy, payload.value, payload.paid)
         }))
     }
-
-function getRequestAllClientsWithAssertion(cy, name, email, telephone){
-         // GET request to fetch all clients
-         cy.request({
+//get all bills, send value and paid-bool
+function getRequestAllBillsWithAssertion(cy, value, paid){
+    cy.authenticateSession().then((response =>{     
+        cy.request({    
             method: "GET",
-            url: ENPOINT_GET_CLIENTS,
+            url: ENDPOINT_GET_BILLS,
             headers:{
             'X-User-Auth': JSON.stringify(Cypress.env().loginToken),
             'Content-Type': 'application/json'
     },
             }).then((response =>{
                 const responseAsString = JSON.stringify(response)
-                expect(responseAsString).to.have.string(name)
-                expect(responseAsString).to.have.string(email)
-                expect(responseAsString).to.have.string(telephone)
+                expect(responseAsString).to.have.string(value)
+                expect(responseAsString).to.have.string(paid)
+                cy.log(response.body.length) //Antal bills 
         }))
+    }))
 }
-
+//gets all bills
 function getAllBillsRequest(cy){
     cy.authenticateSession().then((response =>{
         cy.request({
@@ -56,77 +55,130 @@ function getAllBillsRequest(cy){
             }).then((response =>{
                 const responseAsString = JSON.stringify(response)
                 cy.log(responseAsString)
+                cy.log(response.body.length) //Antal bills 
         }))
     }))
 }
 
-
+//
 function deleteRequestAfterGet(cy){
-    // GET request to fetch all clients
+    // GET request to fetch all bills, helpfunction only. no auth. 
     cy.request({
        method: "GET",
-       url: ENPOINT_GET_CLIENTS,
+       url: ENDPOINT_GET_BILLS,
        headers:{
        'X-User-Auth': JSON.stringify(Cypress.env().loginToken),
        'Content-Type': 'application/json'
 },
        }).then((response =>{
            let lastId = response.body[response.body.length-1].id
-        
+           cy.log(response.body.length) //Antal bills 
+
            cy.request({
                method:"DELETE",
-               url: ENDPOINT_GET_CLIENT+lastId, //bygger på med ID efter urlen... 
+               url: ENDPOINT_GET_BILL+lastId, //bygger på med ID efter urlen... 
                headers:{
                 'X-User-Auth': JSON.stringify(Cypress.env().loginToken),
                 'Content-Type': 'application/json'
                 },
            }).then((response =>{
-            //assert client has been deleted
+            
             const responseAsString = JSON.stringify(response.body)
             cy.log(responseAsString)
             expect(responseAsString).to.have.string(true)
-           // expect(responseAsString).to.not.have.string(payload.name)
-           //man hade ju velat köra en GET och sett avsaknad av clienten... 
         }))
-
-
-         //  cy.log(response.body) //array med antal clients
-         //  cy.log(response.body.length) //Antal clients 
-         //  cy.log(response.body[0].id) //kommer åt index 0 i arrayen, dess id
-         //  cy.log(response.body[0].email) //kommer åt index 0 i arrayen, dess email
-         //  cy.log(response.body[response.body.length-1].id) //id på den sista clienten
    }))
 }
-
-function createClientRequestAndDelete(cy){
+//create new bill and then delete it
+function createBillRequestAndDelete(cy){
     cy.authenticateSession().then((response =>{
         const payload = {
-            "name":"test1",
-            "email":"sandra@test.se",
-            "telephone":"0100000000"
+            "value":"11111",
+            "paid":false
         }
         cy.request({
             method: "POST",
-            url: ENDPOINT_NEW_CLIENT,
+            url: ENDPOINT_NEW_BILL,
             headers: {
                 'X-User-Auth': JSON.stringify(Cypress.env().loginToken),
                 'Content-Type': 'application/json'
             },
             body: payload
         }).then((response =>{
-            //cy.log(JSON.stringify(response))
+            
             const responseAsString = JSON.stringify(response)
-            expect(responseAsString).to.have.string(payload.name)
+            expect(responseAsString).to.have.string(payload.value)
         }))
-       //delete
+       //delete the latest created bill
        deleteRequestAfterGet(cy)
        
     }))
 }
+//
+function createBillRequestAndEdit(cy){
+    cy.authenticateSession().then((response =>{
+        const payload = {
+            "value":"22222",
+            "paid":false
+        }
+        cy.request({
+            method: "POST",
+            url: ENDPOINT_NEW_BILL,
+            headers: {
+                'X-User-Auth': JSON.stringify(Cypress.env().loginToken),
+                'Content-Type': 'application/json'
+            },
+            body: payload
+        }).then((response =>{
+            const responseAsString = JSON.stringify(response)
+            cy.log(responseAsString)
+            expect(responseAsString).to.have.string(payload.value)
+            expect(responseAsString).to.have.string(payload.paid)
+        }))
+       //edit the latest created bill
+       EditBillAfterGet(cy)
+       
+    }))
+}
 
+//EDIT bill... no own auth, so only helpfunction
+function EditBillAfterGet(cy){
+    // GET request to fetch all bills
+    cy.request({
+       method: "GET",
+       url: ENDPOINT_GET_BILLS,
+       headers:{
+       'X-User-Auth': JSON.stringify(Cypress.env().loginToken),
+       'Content-Type': 'application/json'
+},
+       }).then((response =>{
+           let lastId = response.body[response.body.length-1].id
+           const payload = {
+            "value":"22222",
+            "paid":true
+        }
 
+           cy.request({
+               method:"PUT",
+               url: ENDPOINT_GET_BILL+lastId, //bygger på med ID efter urlen... 
+               headers:{
+                'X-User-Auth': JSON.stringify(Cypress.env().loginToken),
+                'Content-Type': 'application/json'
+                },
+                body: payload
+           }).then((response =>{
+            const responseAsString = JSON.stringify(response.body)
+            cy.log(responseAsString)
+            expect(responseAsString).to.have.string(payload.paid)
+        }))
+   }))
+}
 
 
 module.exports = {
-    getAllBillsRequest
+    getAllBillsRequest,
+    getRequestAllBillsWithAssertion,
+    createBillsRequest,
+    createBillRequestAndDelete,
+    createBillRequestAndEdit
 }
