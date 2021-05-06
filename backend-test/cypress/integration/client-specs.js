@@ -13,7 +13,7 @@ describe('Create a new client', function(){
         clientHelpers.getAllClientsRequest(cy)
     })
 
-    it.only('Delete Client', function(){
+    it('Delete Client', function(){
 
         clientHelpers.createClientRequestAndDelete(cy)
     })
