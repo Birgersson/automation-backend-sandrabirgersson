@@ -18,8 +18,7 @@ function createBillsRequest(cy){
                 },
                 body: payload
             }).then((response =>{
-                const responseAsString = JSON.stringify(response)
-                expect(responseAsString).to.have.string(payload.value)
+               
             }))
             getRequestAllBillsWithAssertion(cy, payload.value, payload.paid)
         }))
@@ -38,6 +37,7 @@ function getRequestAllBillsWithAssertion(cy, value, paid){
                 const responseAsString = JSON.stringify(response)
                 expect(responseAsString).to.have.string(value)
                 expect(responseAsString).to.have.string(paid)
+                expect(response.status).to.eq(200)
                 cy.log(response.body.length) //Antal bills 
         }))
     }))
@@ -56,6 +56,7 @@ function getAllBillsRequest(cy){
                 const responseAsString = JSON.stringify(response)
                 cy.log(responseAsString)
                 cy.log(response.body.length) //Antal bills 
+                expect(response.status).to.eq(200)
         }))
     }))
 }
@@ -81,10 +82,11 @@ function deleteRequestAfterGet(cy){
                 'Content-Type': 'application/json'
                 },
            }).then((response =>{
-            
             const responseAsString = JSON.stringify(response.body)
             cy.log(responseAsString)
             expect(responseAsString).to.have.string(true)
+            expect(response.status).to.eq(200)
+            expect(responseAsString).to.not.have.string(lastId) //might fail if there is something else with this number?
         }))
    }))
 }
@@ -104,9 +106,9 @@ function createBillRequestAndDelete(cy){
             },
             body: payload
         }).then((response =>{
-            
             const responseAsString = JSON.stringify(response)
             expect(responseAsString).to.have.string(payload.value)
+            expect(response.status).to.eq(200)
         }))
        //delete the latest created bill
        deleteRequestAfterGet(cy)
@@ -133,6 +135,7 @@ function createBillRequestAndEdit(cy){
             cy.log(responseAsString)
             expect(responseAsString).to.have.string(payload.value)
             expect(responseAsString).to.have.string(payload.paid)
+            expect(response.status).to.eq(200)
         }))
        //edit the latest created bill
        EditBillAfterGet(cy)
@@ -152,7 +155,7 @@ function EditBillAfterGet(cy){
        }).then((response =>{
            let lastId = response.body[response.body.length-1].id
            const payload = {
-            "value":"22222",
+            "value":"33333",
             "paid":true
         }
 
@@ -167,7 +170,9 @@ function EditBillAfterGet(cy){
            }).then((response =>{
             const responseAsString = JSON.stringify(response.body)
             cy.log(responseAsString)
+            expect(responseAsString).to.have.string(payload.value)
             expect(responseAsString).to.have.string(payload.paid)
+            expect(response.status).to.eq(200)
         }))
    }))
 }
