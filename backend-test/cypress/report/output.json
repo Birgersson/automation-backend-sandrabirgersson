@@ -1,0 +1,317 @@
+{
+  "stats": {
+    "suites": 3,
+    "tests": 8,
+    "passes": 8,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-05-06T19:20:35.065Z",
+    "end": "2021-05-06T19:20:55.737Z",
+    "duration": 5814,
+    "testsRegistered": 8,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "6b31ec27-8896-4775-95c2-43761a03be3a",
+      "title": "",
+      "fullFile": "cypress/integration/bill-specs.js",
+      "file": "cypress/integration/bill-specs.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "bdb9ed51-020c-4086-a537-9e6cf472773c",
+          "title": "Testing bills",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Get Bills",
+              "fullTitle": "Testing bills Get Bills",
+              "timedOut": null,
+              "duration": 835,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "billHelpers.getRequestAllBillsWithAssertion(cy, 4500, false);\nlogInLogOutHelper.logOut(cy);",
+              "err": {},
+              "uuid": "ef72217c-b033-4d25-bc3c-abb5893169c5",
+              "parentUUID": "bdb9ed51-020c-4086-a537-9e6cf472773c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Create new Bill",
+              "fullTitle": "Testing bills Create new Bill",
+              "timedOut": null,
+              "duration": 1260,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "billHelpers.createBillsRequest(cy);\nlogInLogOutHelper.logOut(cy);",
+              "err": {},
+              "uuid": "39183b41-aad4-4986-9e74-08ab0100a4ac",
+              "parentUUID": "bdb9ed51-020c-4086-a537-9e6cf472773c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Delete Bill",
+              "fullTitle": "Testing bills Delete Bill",
+              "timedOut": null,
+              "duration": 730,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "billHelpers.createBillRequestAndDelete(cy);\nlogInLogOutHelper.logOut(cy);",
+              "err": {},
+              "uuid": "421af8d4-2ada-405b-846b-192390660a92",
+              "parentUUID": "bdb9ed51-020c-4086-a537-9e6cf472773c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Edit Bill",
+              "fullTitle": "Testing bills Edit Bill",
+              "timedOut": null,
+              "duration": 743,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "billHelpers.createBillRequestAndEdit(cy);\nlogInLogOutHelper.logOut(cy);",
+              "err": {},
+              "uuid": "5aebb8c3-28d1-4d07-8519-3f022fdb5d2c",
+              "parentUUID": "bdb9ed51-020c-4086-a537-9e6cf472773c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ef72217c-b033-4d25-bc3c-abb5893169c5",
+            "39183b41-aad4-4986-9e74-08ab0100a4ac",
+            "421af8d4-2ada-405b-846b-192390660a92",
+            "5aebb8c3-28d1-4d07-8519-3f022fdb5d2c"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3568,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "029b4593-42ad-47a0-865f-39776e468e91",
+      "title": "",
+      "fullFile": "cypress/integration/client-specs.js",
+      "file": "cypress/integration/client-specs.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "467e201a-df1c-4108-acbe-32d1fbf6b0f5",
+          "title": "Create a new client",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "New Client",
+              "fullTitle": "Create a new client New Client",
+              "timedOut": null,
+              "duration": 769,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "clientHelpers.createClientRequest(cy);",
+              "err": {},
+              "uuid": "2e4b3d74-fbe6-45ef-b4e5-c45128940fa5",
+              "parentUUID": "467e201a-df1c-4108-acbe-32d1fbf6b0f5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Get all Clients",
+              "fullTitle": "Create a new client Get all Clients",
+              "timedOut": null,
+              "duration": 564,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "clientHelpers.getAllClientsRequest(cy);",
+              "err": {},
+              "uuid": "a1ee0b8c-fd28-4a73-bb48-63feb20f94e8",
+              "parentUUID": "467e201a-df1c-4108-acbe-32d1fbf6b0f5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Delete Client",
+              "fullTitle": "Create a new client Delete Client",
+              "timedOut": null,
+              "duration": 677,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "clientHelpers.createClientRequestAndDelete(cy);",
+              "err": {},
+              "uuid": "32ae8e98-dc21-4a2d-8ea4-96e0b7149bfa",
+              "parentUUID": "467e201a-df1c-4108-acbe-32d1fbf6b0f5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2e4b3d74-fbe6-45ef-b4e5-c45128940fa5",
+            "a1ee0b8c-fd28-4a73-bb48-63feb20f94e8",
+            "32ae8e98-dc21-4a2d-8ea4-96e0b7149bfa"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2010,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "230bcd79-1d61-4b2d-bfae-dae592c68602",
+      "title": "",
+      "fullFile": "cypress/integration/login-logout-spec.js",
+      "file": "cypress/integration/login-logout-spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3b79ab57-c84f-423d-bed9-3926da61aa85",
+          "title": "Log in and Out",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "LogOut",
+              "fullTitle": "Log in and Out LogOut",
+              "timedOut": null,
+              "duration": 236,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "logInLogOutHelper.logOut(cy);",
+              "err": {},
+              "uuid": "8a8405b3-a715-44e2-bc9b-79b39f5981ca",
+              "parentUUID": "3b79ab57-c84f-423d-bed9-3926da61aa85",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8a8405b3-a715-44e2-bc9b-79b39f5981ca"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 236,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "charts": true,
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome-report"
+      },
+      "version": "5.2.0"
+    }
+  }
+}
