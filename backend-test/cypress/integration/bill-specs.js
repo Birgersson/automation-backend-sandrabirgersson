@@ -28,6 +28,6 @@ describe('Testing bills', function(){
         logInLogOutHelper.logOut(cy)
     })
 
-    
+ 
 })
 
