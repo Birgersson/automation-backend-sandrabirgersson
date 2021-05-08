@@ -18,7 +18,7 @@ function createBillsRequest(cy){
                 },
                 body: payload
             }).then((response =>{
-               
+                expect(response.status).to.eq(200)
             }))
             getRequestAllBillsWithAssertion(cy, payload.value, payload.paid)
         }))
@@ -84,12 +84,27 @@ function deleteRequestAfterGet(cy){
            }).then((response =>{
             const responseAsString = JSON.stringify(response.body)
             cy.log(responseAsString)
-            expect(responseAsString).to.have.string(true)
             expect(response.status).to.eq(200)
-            expect(responseAsString).to.not.have.string(lastId) //might fail if there is something else with this number?
+
+            cy.request({
+                method: "GET",
+                url: ENDPOINT_GET_BILLS,
+                headers:{
+                'X-User-Auth': JSON.stringify(Cypress.env().loginToken),
+                'Content-Type': 'application/json'
+        },
+                }).then((response =>{
+                    const responseAsString = JSON.stringify(response)
+                    cy.log(responseAsString)
+                    cy.log(response.body)
+                    expect(response.status).to.eq(200)
+                    expect(response.body.id).to.not.equal(lastId) //Does this really get the Id? 
+                    
+            }))
         }))
    }))
 }
+
 //create new bill and then delete it
 function createBillRequestAndDelete(cy){
     cy.authenticateSession().then((response =>{
