@@ -8,10 +8,10 @@ describe('Log in and Out', function(){
         logInLogOutHelper.logOut(cy)
     })
 
-    // it('LogOut', function(){
+     it('LogOut', function(){
 
-    //     logInLogOutHelper.logInWithWrongCredentials(cy)
-    // })
+         logInLogOutHelper.logInWithWrongCredentials(cy, 'Tester01', 'DontKnowThePassword')
+     })
     
 })
 
