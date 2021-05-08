@@ -1,4 +1,5 @@
 const ENDPOINT_LOGOUT = 'http://localhost:3000/api/logout'
+const LOGIN_URL = 'http://localhost:3000/api/login' 
 
 function logOut(cy){
 
@@ -31,17 +32,29 @@ function logOut(cy){
            }))
        }
 
-    // function logInWithWrongCredentials(cy){
-    //     cy.authenticateSessionOwnCredentials('Tester01', 'DontKnowThePassword')
-    //     .then((response =>{
-    //             expect(response.status).to.eq(401) //Wanna use this somehow failOnStatusCode = false
-    //             const responseAsString = JSON.stringify(response)
-    //             cy.log(responseAsString)
-    //         }))
-    // }
+    function logInWithWrongCredentials(cy, username, password){
+    
+        
+        cy.request({
+            method: "POST",
+            url: LOGIN_URL,
+            failOnStatusCode: false,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+      
+        }).then((response =>{
+                cy.log(response.body)
+                cy.log(response.status)
+                 expect(response.status).to.eq(401) 
+                 const responseAsString = JSON.stringify(response)
+                 cy.log(responseAsString)
+             })) 
 
+            }
 
     module.exports = {
         logOut,
-        logInAndLogOut
+        logInAndLogOut,
+        logInWithWrongCredentials
     }
